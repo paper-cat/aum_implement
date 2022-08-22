@@ -1,4 +1,6 @@
 from abc import ABC, ABCMeta, abstractmethod
+import random
+import os
 
 
 class test_class(ABC):
@@ -33,6 +35,11 @@ class test_subclass(test_class):
         return None
 
 
+"""
 temp = test_subclass()
 temp.test_static_method()
 temp._abs_method()
+"""
+
+print(max([int(x.split('_')[1].split('.')[0]) for x in os.listdir('trained_weights/v2/') if
+           ('resnet50' in x) and ('of' not in x) and ('done' not in x)]))
