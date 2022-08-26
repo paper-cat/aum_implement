@@ -41,5 +41,8 @@ temp.test_static_method()
 temp._abs_method()
 """
 
-print(max([int(x.split('_')[1].split('.')[0]) for x in os.listdir('trained_weights/v2/') if
-           ('resnet50' in x) and ('of' not in x) and ('done' not in x)]))
+a = [1,2,3]
+b = [3,4,5]
+
+a.extend(b)
+print(set(a))

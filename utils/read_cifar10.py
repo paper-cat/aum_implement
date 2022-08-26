@@ -30,7 +30,7 @@ class Cifar10Dataset(tf.data.Dataset, ABC):
 
     @staticmethod
     def _generator(file_path):
-        # 파일 열기
+        # Open Files
         for i in range(1, 6):
             data_dict = unpickle(file_path.decode('utf-8') + str(i))
             data = data_dict[b'data']
@@ -42,8 +42,8 @@ class Cifar10Dataset(tf.data.Dataset, ABC):
 class Cifar10Dataset_noised(tf.data.Dataset, ABC):
 
     def __new__(cls, file_path, noise_ratio=0.4, shape=(32, 32, 3)):
-        cls.noised_idx = [x for x in random.choices([i for i in range(50000)], k=int(50000 * noise_ratio))]
-        cls.threshold_idx = [x for x in random.choices([i for i in range(50000)], k=int(50000 / 11))]
+        cls.noised_idx = [x for x in random.sample([i for i in range(50000)], k=int(50000 * noise_ratio))]
+        cls.threshold_idx = [x for x in random.sample([i for i in range(50000)], k=int(50000 / 11))]
 
         labels = []
 
@@ -87,7 +87,6 @@ class Cifar10Dataset_noised(tf.data.Dataset, ABC):
 
 def map_preproc(data, labels):
     data = tf.transpose(tf.reshape(tf.convert_to_tensor(data), (3, 32, 32)), (1, 2, 0))
-    data = data / 255.0
     return data, labels
 
 
